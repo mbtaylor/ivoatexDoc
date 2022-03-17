@@ -1103,6 +1103,7 @@ How does one get one's document into ivoa-std?  And when?
 Who runs ivoa-std?  Are there fallbacks?
 
 \subsection{Contributing to a Document}
+\label{sect:contributing}
 
 IVOA repositories for standards and notes follow many open source 
 projects in using a fork and pull request workflow for contributing 
@@ -1243,19 +1244,52 @@ will migrate a repository from where the original editor started it
 do that, they perform the following steps:
 
 \begin{enumerate}
-\item Create a repository \verb|ivoa-std/<short-name>| via github's
-browser UI.  Make sure this repository is public and uses the template
-TODO\footnote{Pat?}
-\item Locally clone the freshly created repository: \verb|git clone <repo>|
-\item \verb|git pull --allow-unrelated-histories <original-repo> master|
-\item \verb|git push origin master|
-\item Setup branch protection rules for the master branch\todo{Pat has
-promised to describe these}
-\item Give the WG chair and the editor the following privileges: maintainer role
-\item Notify the WG (and hopefully the editor) of the move via the WG's 
-mailing list; since the histories are a bit hard to merge, recommend to
-re-clone rather than adding the new remote.
+\item Inspect the \verb|<original-repo>| and make sure it includes the minimal
+files: README.md, LICENSE, Makefile, ivoatex submodule, and a LaTeX
+file with the proposed \verb|<short-name>|
+\item Create a new public repository \verb|ivoa-std/<short-name>| via github's
+browser UI and using the ``import'' facility to import the \verb|<original-repo>|
+\item Make a local clone and build the document; if this fails, create an issue
+for the original author(s) to fix before any work can proceed
+\item Optional: add github workflow, commit, and push directly to master branch
+\item Setup branch protection rules for the master branch (see below)
+\item Give the WG team and the editor admin privileges (see below)
+\item Notify the WG and the editor of the move via the WG's mailing list
+\item Notify the original owner, noting that \verb|<original-repo>|
+should be renamed and preserved for a while, while the repository must
+now be forked from ivoa-std in order to enable future pull requests
+(cf.~sect.~\ref{sect:contributing})
 \end{enumerate}
+
+Branch protection rules are set up in the ``Settings'' tab of the repository (top right). 
+On the left side of the settings page, chose ``Branches'' and either edit the \verb|master|
+branch rules (if present) or add a new rule (if not). The standard set of rules that are
+suitable for most development are:
+
+\begin{enumerate}
+\item Require a pull request before merging
+\item Require approvals
+\item Dismiss stale pull request approvals when new commits are pushed
+\item Require status checks to pass before merging (see below)
+\item Require branches to be up to date before merging
+\end{enumerate}
+
+The status checks requirement can be enabled before an actual check (github workflow) is
+added or found by the system. Repository administrators may have to come back and enable a 
+specific status check workflow after it is added (behaviour is a little opaque here).
+
+By not enabling ``Include administrators'', repository admins will be able to override the 
+approval requirement and merge pull requests that do not require review (e.g., fixing the build,
+updating Makefile settings, etc).
+
+Granting admin privileges to the WG (there is a team setup for each WG) is also done in the 
+``Settings'' tab. On the left side of the settings page, chose ``Collaborators and teams''
+and then ``Add teams'' (green button on the right). Start typing the WG name or acronym (e.g.
+dal or reg) and then select the complete group name from the popup. The WG teams are all
+of the form \verb|ivoa-std/<group>-admin|; the complete list can be found from the top-level 
+\verb|ivoa-std| organization page in the ``Teams'' tab.
+
+\todo{Pat will remove the tcg-members team so that the child wg admin teams are directly visible}
 
 \section{Customisation and Development}
 \label{sect:impl}
