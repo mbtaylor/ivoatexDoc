@@ -1103,6 +1103,7 @@ How does one get one's document into ivoa-std?  And when?
 Who runs ivoa-std?  Are there fallbacks?
 
 \subsection{Contributing to a Document}
+\label{sect:contributing}
 
 IVOA repositories for standards and notes follow many open source 
 projects in using a fork and pull request workflow for contributing 
@@ -1254,12 +1255,13 @@ for the original author(s) to fix before any work can proceed
 \item Setup branch protection rules for the master branch (see below)
 \item Give the WG team and the editor admin privileges (see below)
 \item Notify the WG and the editor of the move via the WG's mailing list
-\item Recommend that \verb|<original-repo>| be preserved for awhile but the owner 
-should create a new fork (ref to Contributing section above) of the ivoa-std 
-repository for future work
+\item Notify the original owner, noting that \verb|<original-repo>|
+should be renamed and preserved for a while, while the repository must
+now be forked from ivoa-std in order to enable future pull requests
+(cf.~sect.~\ref{sect:contributing})
 \end{enumerate}
 
-Branch protection rules are setup in the ``Settings'' tab of the repository (top right). 
+Branch protection rules are set up in the ``Settings'' tab of the repository (top right). 
 On the left side of the settings page, chose ``Branches'' and either edit the \verb|master|
 branch rules (if present) or add a new rule (if not). The standard set of rules that are
 suitable for most development are:
@@ -1277,7 +1279,7 @@ added or found by the system. Repository administrators may have to come back an
 specific status check workflow after it is added (behaviour is a little opaque here).
 
 By not enabling ``Include administrators'', repository admins will be able to override the 
-approval requirement and merge pull requests that do not require review (e.g. fixing the build,
+approval requirement and merge pull requests that do not require review (e.g., fixing the build,
 updating Makefile settings, etc).
 
 Granting admin privileges to the WG (there is a team setup for each WG) is also done in the 
